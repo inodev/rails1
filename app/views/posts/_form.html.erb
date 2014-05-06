@@ -18,9 +18,14 @@
     <%= f.label :content %>
     <%= f.text_area :content, :rows => 5 %>
   </div>
-  
+
+  <div class="field">
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar %>
+  </div>
+
   <div class="actions">
-    <%= f.submit %>
+      <%= f.submit :disable_with => '処理中...' %>
   </div>
   
 <% end %>

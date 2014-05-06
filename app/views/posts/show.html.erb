@@ -2,6 +2,8 @@
 
 <p><%= @post.content %></p>
 
+<p><%= image_tag @post.avatar.url(:medium) %></p>
+
 <h2>Comments</h2>
 <ul>
 <% if @post.comments.any? %>
