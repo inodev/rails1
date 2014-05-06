@@ -1,6 +1,10 @@
 # coding: utf-8
 
 class PostsController < ApplicationController
+
+  # 認証フィルター
+  before_filter :authenticate_user!
+
   def index
     @posts = Post.all(:order => "created_at DESC")
   end
