@@ -4,8 +4,9 @@
 <p class="bbold16">登録件数:
 <%= @posts.size %> 件</p>
 
-<% timeInteger = Time.now.tv_sec %>
-<% newd = 1 * 24 * 60 * 60 %>
+<% # NEWを表示する期間（秒）
+newd = 7 * 24 * 60 * 60 %>
+
 
 <div id="news">
 <ul>
@@ -13,24 +14,28 @@
 <li id="post_<%= post.id %>">
 
 <% # 投稿からの経過時間取得
-pt = timeInteger - post.created_at.tv_sec %>
+pt = Time.now.tv_sec - post.created_at.tv_sec %>
 
-作成日：
+作成日:
 <%= # .strftime('%Y年%m月%d日 %H:%M:%S') 
 post.created_at.strftime('%m/%d') %>
 
-更新日：
+更新日:
 <%= post.updated_at.strftime('%m/%d %H:%M') %>
-<% time_ago_in_words(post.created_at) %>
+(<%= time_ago_in_words(post.created_at) %>前)
 
 <%# 経過時間がNEWを出す日数以下ならNEWを表示 %>
 <% if pt < newd then %>
-New
+<%= image_tag('new.png', :alt => 'new icon', :size => '40*20') %>
 <% end %>
 
-<%= link_to post.title, post_path(post) %> (<%= post.comments.size %>)
-<%= link_to 'Edit', edit_post_path(post) %>
-<%= link_to 'Delete', post, :confirm => 'Sure?',
+
+<h4>
+◆ <%= link_to post.title, post_path(post) %>
+</h4>
+Comments:<%= post.comments.size %>
+<%= link_to 'Edt', edit_post_path(post) %>
+<%= link_to 'Del', post, :confirm => 'Sure?',
                             :method => :delete,
                             :remote => true %>
 </li>
@@ -38,7 +43,9 @@ New
 </ul>
 
 <h3>H3test</h3>
-
+<p>
+H3の表示もテストしてみる。
+</p>
 <%= link_to 'home', posts_path %> | <%= link_to 'New', new_post_path %>
 
 <script>
