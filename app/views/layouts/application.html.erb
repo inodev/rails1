@@ -1,3 +1,4 @@
+# coding: utf-8
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,17 +7,41 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body style="background-color:#ccc">
-    
-<p class="notice">
-  <%= notice %>
-</p>
-<p class="alert">
-  <%= alert %>
-</p>
+<body>
 
-<%= link_to image_tag( 'testimg.jpg', :size => '200x40'), '/' %>
-<%= yield %>
+  <div id="header">
+  <div id="headerArea">
+    <div class="header_txt"><h1>侍エンジニア塾H1タグ</h1></div>
+    <div class="header_logo"><%= link_to image_tag('logo.gif',:size => '200x40'),'/' %></div>
+
+    <div id="gnavi">
+      <ul id="globalnavi">
+      <li><%= link_to 'Home', posts_path %></li>
+      <li><%= link_to '新規投稿', new_post_path %></li>
+      </ul>
+    </div><!-- end div#gnavi -->
+
+  </div><!-- end div#headerArea -->
+  </div><!-- end div#header -->
+
+  <div id="content" class="floatwrap">
+  <div id="contentArea" class="floatwrap">
+
+  <div id="main" class="floatwrap">
+
+    <div id="notice"><%= notice %></div>
+    <div id="alert"><%= alert %></div>
+
+    <%= yield %>
+  
+  </div><!-- end div#main -->
+
+  <div id="side" class="floatwrap">
+  <p>sidebar</p>
+  </div><!-- end div#side -->
+
+  </div><!-- end div#contentArea -->
+  </div><!-- end div#content -->
 
 </body>
 </html>
