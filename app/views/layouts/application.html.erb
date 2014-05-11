@@ -27,8 +27,11 @@
   <div id="content" class="floatwrap">
   <div id="contentArea" class="floatwrap">
 
-  <div id="main" class="floatwrap">
+  <div id="side" class="floatwrap">
+  <p>sidebar</p>
+  </div><!-- end div#side -->
 
+  <div id="main" class="floatwrap">
     <div id="notice"><%= notice %></div>
     <div id="alert"><%= alert %></div>
 
@@ -36,12 +39,21 @@
   
   </div><!-- end div#main -->
 
-  <div id="side" class="floatwrap">
-  <p>sidebar</p>
-  </div><!-- end div#side -->
 
   </div><!-- end div#contentArea -->
   </div><!-- end div#content -->
 
+  <div id="footer">
+  <div id="footerArea">
+
+  <div class="footer_navi">
+  <ul>
+      <li><%= link_to 'Home', posts_path %></li>
+      <li><%= link_to '新規投稿', new_post_path %></li>
+  </ul>
+  </div>
+
+  </div><!-- end div#footerArea -->
+  </div><!-- end div#footer -->
 </body>
 </html>

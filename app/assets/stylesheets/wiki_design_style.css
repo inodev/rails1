@@ -329,7 +329,7 @@ div#contentArea{
 
 
 div#main{
-  float: left; 
+  float: right; 
   padding: 0;
   margin: 0 auto;
   width: 720px;
@@ -351,10 +351,10 @@ div#main h2{
 div#main h3{
   padding: 0 0 0 10px;
   margin: 10px 0 10px 0;
-  color: #666666;
+  color: #ffffff;
   background: url(/assets/h3.jpg) no-repeat;
-  font-size: 108%;
-  font-weight:bold;
+  font-size: 100%;
+  font-weight:bolder;
   line-height: 35px;
   height: 36px;
 
@@ -384,7 +384,7 @@ div#main img{
 /* ===== サイドバー ===== */
 
 div#side{
-  float: right; 
+  float: left; 
   padding: 0;
   margin: 0;
   width: 200px;
