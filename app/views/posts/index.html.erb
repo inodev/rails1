@@ -1,8 +1,11 @@
 <div id="notice"><%= notice %></div>
 <h2>Posts</h2>
 
-<p class="bbold16">登録件数:
-<%= @posts.size %> 件</p>
+<p>ページ:<%= @posts.current_page %> / <%= @posts.num_pages %></p>
+<p><%= @posts.total_count %>件中<%= @posts.offset_value %>
+～<%= @posts.offset_value + @posts.length %>件を表示しています。</p>
+<p><%= paginate @posts %></p>
+
 
 <% # NEWを表示する期間（秒）
 newd = 7 * 24 * 60 * 60 %>
@@ -41,6 +44,8 @@ Comments:<%= post.comments.size %>
 </li>
 <% end %>
 </ul>
+<p><%= paginate @posts %></p>
+
 
 <h3>H3test</h3>
 <p>

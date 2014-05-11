@@ -6,7 +6,8 @@ class PostsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @posts = Post.all(:order => "created_at DESC")
+    @posts = Post.scoped(:order => "created_at DESC").page(params[:page]).per(4)
+    #@posts = Post.all(:order => "created_at DESC")
   end
 
   def show
