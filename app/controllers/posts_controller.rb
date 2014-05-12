@@ -6,8 +6,14 @@ class PostsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @posts = Post.scoped(:order => "created_at DESC").page(params[:page]).per(4)
-    #@posts = Post.all(:order => "created_at DESC")
+    @search_form = SearchForm.new (params[:search_form])
+
+    @posts = Post.all(:order => "created_at DESC")
+    @posts = Post.scoped(:order => "created_at ASC").page(params[:page]).per(4)
+
+    if @search_form.q.present?
+      @posts = @posts.content_or_title_matches @search_form.q
+    end
   end
 
   def show
