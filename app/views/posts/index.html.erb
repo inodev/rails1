@@ -2,8 +2,7 @@
 <h2>Posts</h2>
 
 <p>ページ:<%= @posts.current_page %> / <%= @posts.num_pages %></p>
-<p><%= @posts.total_count %>件中<%= @posts.offset_value %>
-～<%= @posts.offset_value + @posts.length %>件を表示しています。</p>
+<p><%= @posts.total_count %>件中 <%= @posts.offset_value + 1  %>～<%= @posts.offset_value + @posts.length %>件を表示しています。</p>
 <p><%= paginate @posts %></p>
 
 

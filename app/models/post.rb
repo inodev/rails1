@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   has_many :comments
 
   default_scope :order => 'created_at DESC'
-  paginates_per 5
+  paginates_per 4
 
   # 検索条件をラムダ式で追加
   scope :content_or_title_matches, lambda {|q|  

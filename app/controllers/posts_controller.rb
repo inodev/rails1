@@ -7,11 +7,13 @@ class PostsController < ApplicationController
 
   def index
     @search_form = SearchForm.new (params[:search_form])
-
-    @posts = Post.all(:order => "created_at DESC")
     @posts = Post.scoped(:order => "created_at ASC").page(params[:page]).per(4)
 
     if @search_form.q.present?
+      # 検索対象 7日前〜当日
+      to = Date.today
+      from = to - 7
+      @posts = Post.scoped(:order => "created_at ASC", :conditions =>{:updated_at => from..to}).page(params[:page]).per(4)
       @posts = @posts.content_or_title_matches @search_form.q
     end
   end
