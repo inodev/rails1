@@ -48,9 +48,13 @@ Comments:<%= post.comments.size %>
 
 <h3>検索</h3>
 <p>
-<%= form_for @search_form, :url => posts_path,
-  :html => {:method => :get} do |f| %>
-  <%= f.search_field :q %>
+<%= form_for @search_form, :url => posts_path, :html => {:method => :get} do |f| %>
+</p>
+<p>
+検索対象：<%= f.search_field :q %><br />
+検索範囲：<%= select_date(nil, :prefix => "from") %> 〜 <%= select_date(Date.today, :prefix => "to") %>
+</p>
+<p>
   <%= f.submit '検索' %>
 <% end %>
 </p>

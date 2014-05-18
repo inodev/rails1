@@ -10,9 +10,14 @@ class PostsController < ApplicationController
     @posts = Post.scoped(:order => "created_at ASC").page(params[:page]).per(4)
 
     if @search_form.q.present?
-      # 検索対象 7日前〜当日
-      to = Date.today
-      from = to - 7
+      # 検索対象の日付をフォームタグから取得
+      to   = Date.new(params[:to][:year].to_i,
+                      params[:to][:month].to_i,
+                      #日付のみ指定だと０時扱いになる為？、＋１日して指定日も検索対象とする。
+                      params[:to][:day].to_i + 1) 
+      from = Date.new(params[:from][:year].to_i,
+                      params[:from][:month].to_i,
+                      params[:from][:day].to_i)
       @posts = Post.scoped(:order => "created_at ASC", :conditions =>{:updated_at => from..to}).page(params[:page]).per(4)
       @posts = @posts.content_or_title_matches @search_form.q
     end
