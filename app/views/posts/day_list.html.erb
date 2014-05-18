@@ -1,0 +1,11 @@
+<% date = @date %>
+
+<% y = date[0,4] %>
+<% m = date[4,2] %>
+<% d = date[6,2] %>
+
+<% date = y + "年" + m + "月" + d + "日" %>
+
+<h2><%= date %>一覧</h2>
+
+<%= render 'list' %>

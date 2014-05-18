@@ -1,0 +1,56 @@
+<p class="bbold16">登録件数:
+<%= @posts.size %> 件</p>
+
+<%# 現在時刻取得 %>
+<% t = Time.now %>
+<%# 整数に変換 %>
+<% timeInteger = t.tv_sec %>
+<%# NEWを出す日数を設定 %>
+<% newd = 1 %>
+<%# 経過時間を計算(設定日数×24時間) %>
+<% newd = newd * 86400 %>
+
+<div id="news">
+<ul>
+<% @posts.each do |post| %>
+<li id="post_<%= post.id %>">
+
+<%# Post作成時間を取得（整数に変換） %>
+<% pt = post.created_at.tv_sec %>
+<%# Post作成時間から経過時間を計算 %>
+<% pt = timeInteger - pt %>
+
+作成日:
+<%= post.created_at.strftime('%m/%d') %>
+<%# .strftime('%Y年%m月%d日 %H:%M:%S') %>
+
+更新日
+<%= post.updated_at.strftime('%m/%d %H:%M') %>
+
+<% time_ago_in_words(post.created_at) %>
+
+<%# 経過時間がNEWを出す日数以下ならNEWを表示 %>
+<% if pt < newd then %>
+New
+<% end %>
+
+<%= link_to post.title, post_path(post) %> (<%= post.comments.size %>)
+<%= link_to 'Edit', edit_post_path(post) %>
+<%= link_to 'Delete', post, :confirm => 'Sure?', :method => :delete, :remote => true %>
+</li>
+<% end %>
+</ul>
+</div>
+
+<script>
+$(function() {
+  setTimeout(function() {
+    $('#notice').fadeOut("slow");
+  }, 800);
+
+  $('a[data-method="delete"]').live('ajax:success', function(e, data, status, xhr) {
+    $('#post_'+data.post.id).fadeOut("slow");
+  });
+
+});
+</script>

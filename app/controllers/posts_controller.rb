@@ -28,6 +28,17 @@ class PostsController < ApplicationController
     @comment = Post.find(params[:id]).comments.build
   end
 
+  def day
+    @posts = Post.all(:order => "created_at DESC")
+    @post_days = @posts.group_by { |t| t.created_at.beginning_of_day }
+  end
+
+  def day_list
+    @date = params[:date]
+    i = @date[0,4] + '-' + @date[4,2] + '-' + @date[6,2]
+    @posts = Post.where(["created_at between ? and ?", "#{i} 00:00:00", "#{i} 24:00:00"]).order("created_at DESC")
+  end
+
   def new
    @post = Post.new
   end

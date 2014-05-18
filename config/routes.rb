@@ -5,6 +5,10 @@ Blog::Application.routes.draw do
   resources :posts do
     resources :comments
   end
+
+  match 'day' => 'posts#day'
+  match 'day_list/:date' => 'posts#day_list'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
