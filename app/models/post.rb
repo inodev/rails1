@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
 
   has_many :comments
 
-  default_scope :order => 'created_at DESC'
+  default_scope :order => 'created_at ASC'
   paginates_per 4
 
   # 検索条件をラムダ式で追加

@@ -35,8 +35,8 @@ class PostsController < ApplicationController
 
   def day_list
     @date = params[:date]
-    i = @date[0,4] + '-' + @date[4,2] + '-' + @date[6,2]
-    @posts = Post.where(["created_at between ? and ?", "#{i} 00:00:00", "#{j} 24:00:00"]).order("created_at DESC")
+    ymd = @date[0,4] + '-' + @date[4,2] + '-' + @date[6,2]
+    @posts = Post.where(["created_at between ? and ?", "#{ymd} 00:00:00", "#{ymd} 24:00:00"]).order("created_at DESC")
   end
 
   def month
@@ -46,9 +46,20 @@ class PostsController < ApplicationController
 
   def month_list
     @date = params[:date]
-    i = @date[0,4] + '-' + @date[4,2] + '-00'
-    j = @date[0,4] + '-' + @date[4,2] + '-31'
-    @posts = Post.where(["created_at between ? and ?", "#{i} 00:00:00", "#{j} 00:00:00"]).order("created_at DESC")
+    ym = @date[0,4] + '-' + @date[4,2]
+    a = Date.new(:date => @date).next_month
+    @posts = Post.where(["created_at between ? and ?", "#{ym}-01 00:00:00", "#{ym}-31 24:00:00"]).order("created_at DESC")
+  end
+
+  def year
+    @posts = Post.all(:order => "created_at DESC")
+    @post_years = @posts.group_by { |t| t.created_at.beginning_of_year }
+  end
+
+  def year_list
+    @date = params[:date]
+    y = @date[0,4]
+    @posts = Post.where(["created_at between ? and ?", "#{y}-01-01 00:00:00", "#{y}-12-31 24:00:00"]).order("created_at DESC")
   end
 
   def new
