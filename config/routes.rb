@@ -8,6 +8,8 @@ Blog::Application.routes.draw do
 
   match 'day' => 'posts#day'
   match 'day_list/:date' => 'posts#day_list'
+  match 'month' => 'posts#month'
+  match 'month_list/:date' => 'posts#month_list'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

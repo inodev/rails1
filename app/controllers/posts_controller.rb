@@ -36,7 +36,19 @@ class PostsController < ApplicationController
   def day_list
     @date = params[:date]
     i = @date[0,4] + '-' + @date[4,2] + '-' + @date[6,2]
-    @posts = Post.where(["created_at between ? and ?", "#{i} 00:00:00", "#{i} 24:00:00"]).order("created_at DESC")
+    @posts = Post.where(["created_at between ? and ?", "#{i} 00:00:00", "#{j} 24:00:00"]).order("created_at DESC")
+  end
+
+  def month
+    @posts = Post.all(:order => "created_at DESC")
+    @post_months = @posts.group_by { |t| t.created_at.beginning_of_month }
+  end
+
+  def month_list
+    @date = params[:date]
+    i = @date[0,4] + '-' + @date[4,2] + '-00'
+    j = @date[0,4] + '-' + @date[4,2] + '-31'
+    @posts = Post.where(["created_at between ? and ?", "#{i} 00:00:00", "#{j} 00:00:00"]).order("created_at DESC")
   end
 
   def new
