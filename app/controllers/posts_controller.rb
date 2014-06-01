@@ -75,6 +75,7 @@ class PostsController < ApplicationController
   def cat_list
     cat = params[:cat]
     @posts = Post.find(:all,:conditions => {:category_id => cat})
+    @catname = Category.find(cat)
   end
 
   def new

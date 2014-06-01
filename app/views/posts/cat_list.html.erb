@@ -1,6 +1,6 @@
-<% if @cat.nil? %>
+<% if @catname.nil? %>
   <h2>カテゴリ未登録</h2>
 <% else %>
-  <h2><%= @cat.name %>一覧</h2>
+  <h2>カテゴリ「<%= @catname.name %>」一覧</h2>
 <% end %>
 <%= render 'list' %>
