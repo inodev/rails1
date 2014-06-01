@@ -26,6 +26,8 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comment = Post.find(params[:id]).comments.build
+    @categories = Category.all
+    @cat = Category.find_by_id(@post.category_id)
   end
 
   def day
@@ -60,6 +62,19 @@ class PostsController < ApplicationController
     @date = params[:date]
     y = @date[0,4]
     @posts = Post.where(["created_at between ? and ?", "#{y}-01-01 00:00:00", "#{y}-12-31 24:00:00"]).order("created_at DESC")
+  end
+
+  # カテゴリーリスト
+  def category_list
+    @categories = Category.all
+    @posts = Post.all(:order => "category_id DESC")
+    @post_categories = Post.find(:all).group_by(&:category_id)
+  end
+
+  # カテゴリー詳細
+  def cat_list
+    cat = params[:cat]
+    @posts = Post.find(:all,:conditions => {:category_id => cat})
   end
 
   def new

@@ -4,6 +4,14 @@
 
 <p><%= image_tag @post.avatar.url(:medium) %></p>
 
+<% if @post.category_id.nil? %>
+  <h3>カテゴリ</h3>
+  <p>カテゴリが登録されていません。</p>
+<% else %>
+  <h3>カテゴリ：<%= @post.category_id %></h3>
+  <p><%= @cat.name %></p>
+<% end %>
+
 <h2>Comments</h2>
 <ul>
 <% if @post.comments.any? %>

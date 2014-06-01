@@ -24,8 +24,14 @@
     <%= f.file_field :avatar %>
   </div>
 
+  <div class="field">
+    <%= f.label :category_id %>
+    <%= f.collection_select :category_id, Category.all, :id, :name %>
+  </div>
+
   <div class="actions">
       <%= f.submit :disable_with => '処理中...' %>
   </div>
+  
   
 <% end %>

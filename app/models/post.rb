@@ -1,7 +1,8 @@
 class Post < ActiveRecord::Base
-  attr_accessible :content, :title
+  attr_accessible :content, :title, :category_id
 
   has_many :comments
+  has_many :categories
 
   default_scope :order => 'created_at ASC'
   paginates_per 4
