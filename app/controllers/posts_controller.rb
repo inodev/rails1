@@ -66,9 +66,9 @@ class PostsController < ApplicationController
 
   # カテゴリーリスト
   def category_list
-    @categories = Category.all
-    @posts = Post.all(:order => "category_id DESC")
-    @post_categories = Post.find(:all).group_by(&:category_id)
+    @categories = Post.find(:all).group_by(&:category_id)
+    @post = Post.scoped(:order => "created_at DESC").page(params[:page]).per(2)
+    @post_categories = @post.group_by(&:category_id)
   end
 
   # カテゴリー詳細
