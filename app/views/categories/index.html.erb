@@ -1,5 +1,9 @@
 <h2>Listing categories</h2>
 
+<p>ページ:<%= @categories.current_page %> / <%= @categories.num_pages %></p>
+<p><%= @categories.total_count %>件中 <%= @categories.offset_value + 1  %>～<%= @categories.offset_value + @categories.length %>件を表示しています。</p>
+<p><%= paginate @categories %></p>
+
 <table>
   <tr>
     <th>Name</th>
