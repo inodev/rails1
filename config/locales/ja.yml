@@ -6,6 +6,20 @@ ja:
       truncate: "..."
       first: "最初"
       last:  "最後"
+  activerecord:
+    models:
+      category: category
+  attributes:
+    category:
+      name: カテゴリ名
+      Back: 前画面
+  link:
+    New: 追加
+    Show: 表示
+    Edit: 編集
+    Destroy: 削除
+    Back: 前画面
+    NewCategory: 新規カテゴリ
   date:
     abbr_day_names:
     - 日
